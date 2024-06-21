@@ -1,90 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fuel Cost Calculator</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 50px;
+            /* font-family: Arial, sans-serif; */
+            font-family: "Roboto", sans-serif;
+            margin: 0px 0px;
         }
+
         form {
             max-width: 400px;
             margin: auto;
         }
-        input, button {
+
+        input,
+        button {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
         }
+
+        body {
+            /* background-image: url("./bg.jpeg"); */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: rgba(234, 234, 234, 0.763);
+
+        }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1 class="text-center">Al-Murtaza Petroliums</h1>
-        <div class="row">
-            <div class="col-md-6">
-                <form id="petrolForm">
-                    <h2 class="text-center">Petrol</h2>
-                    <div class="form-group">
-                        <label for="petrolPrice">Today's Petrol Price (per liter):</label>
-                        <input type="number" class="form-control" id="petrolPrice" name="petrolPrice" step="0.01" required oninput="calculate('petrol')">
+    <Section id="wrapper ">
+        <!-- <h1 class="text-center mt-3 text-white bg-primary card">Al-Murtaza Petroliums</h1> -->
+       <div class="text-center mt-5"><a href="https://www.askaroil.com.pk/"><img class="img-fluid" style="height: 100px;" src="https://www.askaroil.com.pk/wp-content/themes/AskarOil/Images/001.png" alt=""></a></div>  
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text-center my-2 text-white card-header shadow" style="background-color: rgba(8, 63, 241, 0.826);">
+                        Fuel
+                        Cost Calculator | Al-Murtza Petroliums </h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-body shadow">
+                                <div id="petrolForm card">
+                                    <h2 class="text-center text-danger">Petrol</h2>
+                                    <div class="form-group">
+                                        <label for="petrolPrice">Today's Petrol Price (per liter):</label>
+                                        <input type="number" class="form-control" id="petrolPrice" name="petrolPrice"
+                                            step="0.01" required oninput="calculate('petrol')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="petrolPreviousReading">Previous Meter Reading (km):</label>
+                                        <input type="number" class="form-control" id="petrolPreviousReading"
+                                            name="petrolPreviousReading" oninput="calculate('petrol')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="petrolCurrentReading">Current Meter Reading (km):</label>
+                                        <input type="number" class="form-control" id="petrolCurrentReading"
+                                            name="petrolCurrentReading" oninput="calculate('petrol')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="petrolKilometers">Total Kilometers Driven:</label>
+                                        <input type="number" class="form-control" id="petrolKilometers"
+                                            name="petrolKilometers" step="0.01" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="petrolTotalLiters">Total Liters Used:</label>
+                                        <input type="number" class="form-control" id="petrolTotalLiters"
+                                            name="petrolTotalLiters" step="0.01"
+                                            oninput="calculate('petrol', 'liters')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="petrolTotalPrice">Total Price:</label>
+                                        <input type="number" class="form-control" id="petrolTotalPrice"
+                                            name="petrolTotalPrice" step="0.01" oninput="calculate('petrol', 'price')">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body shadow">
+                                <div id="dieselForm card">
+                                    <h2 class="text-center text-success">Diesel</h2>
+                                    <div class="form-group">
+                                        <label for="dieselPrice">Today's Diesel Price (per liter):</label>
+                                        <input type="number" class="form-control" id="dieselPrice" name="dieselPrice"
+                                            step="0.01" required oninput="calculate('diesel')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dieselPreviousReading">Previous Meter Reading (km):</label>
+                                        <input type="number" class="form-control" id="dieselPreviousReading"
+                                            name="dieselPreviousReading" oninput="calculate('diesel')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dieselCurrentReading">Current Meter Reading (km):</label>
+                                        <input type="number" class="form-control" id="dieselCurrentReading"
+                                            name="dieselCurrentReading" oninput="calculate('diesel')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dieselKilometers">Total Kilometers Driven:</label>
+                                        <input type="number" class="form-control" id="dieselKilometers"
+                                            name="dieselKilometers" step="0.01" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dieselTotalLiters">Total Liters Used:</label>
+                                        <input type="number" class="form-control" id="dieselTotalLiters"
+                                            name="dieselTotalLiters" step="0.01"
+                                            oninput="calculate('diesel', 'liters')">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dieselTotalPrice">Total Price:</label>
+                                        <input type="number" class="form-control" id="dieselTotalPrice"
+                                            name="dieselTotalPrice" step="0.01" oninput="calculate('diesel', 'price')">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="form-group">
-                        <label for="petrolPreviousReading">Previous Meter Reading (km):</label>
-                        <input type="number" class="form-control" id="petrolPreviousReading" name="petrolPreviousReading" oninput="calculate('petrol')">
-                    </div>
-                    <div class="form-group">
-                        <label for="petrolCurrentReading">Current Meter Reading (km):</label>
-                        <input type="number" class="form-control" id="petrolCurrentReading" name="petrolCurrentReading" oninput="calculate('petrol')">
-                    </div>
-                    <div class="form-group">
-                        <label for="petrolKilometers">Total Kilometers Driven:</label>
-                        <input type="number" class="form-control" id="petrolKilometers" name="petrolKilometers" step="0.01" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="petrolTotalLiters">Total Liters Used:</label>
-                        <input type="number" class="form-control" id="petrolTotalLiters" name="petrolTotalLiters" step="0.01" oninput="calculate('petrol', 'liters')">
-                    </div>
-                    <div class="form-group">
-                        <label for="petrolTotalPrice">Total Price:</label>
-                        <input type="number" class="form-control" id="petrolTotalPrice" name="petrolTotalPrice" step="0.01" oninput="calculate('petrol', 'price')">
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6">
-                <form id="dieselForm">
-                    <h2 class="text-center">Diesel</h2>
-                    <div class="form-group">
-                        <label for="dieselPrice">Today's Diesel Price (per liter):</label>
-                        <input type="number" class="form-control" id="dieselPrice" name="dieselPrice" step="0.01" required oninput="calculate('diesel')">
-                    </div>
-                    <div class="form-group">
-                        <label for="dieselPreviousReading">Previous Meter Reading (km):</label>
-                        <input type="number" class="form-control" id="dieselPreviousReading" name="dieselPreviousReading" oninput="calculate('diesel')">
-                    </div>
-                    <div class="form-group">
-                        <label for="dieselCurrentReading">Current Meter Reading (km):</label>
-                        <input type="number" class="form-control" id="dieselCurrentReading" name="dieselCurrentReading" oninput="calculate('diesel')">
-                    </div>
-                    <div class="form-group">
-                        <label for="dieselKilometers">Total Kilometers Driven:</label>
-                        <input type="number" class="form-control" id="dieselKilometers" name="dieselKilometers" step="0.01" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="dieselTotalLiters">Total Liters Used:</label>
-                        <input type="number" class="form-control" id="dieselTotalLiters" name="dieselTotalLiters" step="0.01" oninput="calculate('diesel', 'liters')">
-                    </div>
-                    <div class="form-group">
-                        <label for="dieselTotalPrice">Total Price:</label>
-                        <input type="number" class="form-control" id="dieselTotalPrice" name="dieselTotalPrice" step="0.01" oninput="calculate('diesel', 'price')">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+                </div>
+    </Section>
+
 
 
     <script>
@@ -110,9 +157,10 @@
             }
         }
     </script>
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2024 Copyright:
-        <a class="text-center fw-bold" href="#">Tanveer Ahmad</a>
-      </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2024 Copyright: Al-Murtaza Petroliums Dhanote
+        <a class="text-center fw-bold" href="https://github.com/TanveerAhamd"> <span class="ms-3 d-inline-block text-success">Created by : </span>Tanveer Ahmad</a>
+    </div>
 </body>
+
 </html>
