@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuel Cost Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Al-Murtaza Petroliums</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <form id="petrolForm">
+                    <h2 class="text-center">Petrol</h2>
+                    <div class="form-group">
+                        <label for="petrolPrice">Today's Petrol Price (per liter):</label>
+                        <input type="number" class="form-control" id="petrolPrice" name="petrolPrice" step="0.01" required oninput="calculate('petrol')">
+                    </div>
+                    <div class="form-group">
+                        <label for="petrolPreviousReading">Previous Meter Reading (km):</label>
+                        <input type="number" class="form-control" id="petrolPreviousReading" name="petrolPreviousReading" oninput="calculate('petrol')">
+                    </div>
+                    <div class="form-group">
+                        <label for="petrolCurrentReading">Current Meter Reading (km):</label>
+                        <input type="number" class="form-control" id="petrolCurrentReading" name="petrolCurrentReading" oninput="calculate('petrol')">
+                    </div>
+                    <div class="form-group">
+                        <label for="petrolKilometers">Total Kilometers Driven:</label>
+                        <input type="number" class="form-control" id="petrolKilometers" name="petrolKilometers" step="0.01" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="petrolTotalLiters">Total Liters Used:</label>
+                        <input type="number" class="form-control" id="petrolTotalLiters" name="petrolTotalLiters" step="0.01" oninput="calculate('petrol', 'liters')">
+                    </div>
+                    <div class="form-group">
+                        <label for="petrolTotalPrice">Total Price:</label>
+                        <input type="number" class="form-control" id="petrolTotalPrice" name="petrolTotalPrice" step="0.01" oninput="calculate('petrol', 'price')">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form id="dieselForm">
+                    <h2 class="text-center">Diesel</h2>
+                    <div class="form-group">
+                        <label for="dieselPrice">Today's Diesel Price (per liter):</label>
+                        <input type="number" class="form-control" id="dieselPrice" name="dieselPrice" step="0.01" required oninput="calculate('diesel')">
+                    </div>
+                    <div class="form-group">
+                        <label for="dieselPreviousReading">Previous Meter Reading (km):</label>
+                        <input type="number" class="form-control" id="dieselPreviousReading" name="dieselPreviousReading" oninput="calculate('diesel')">
+                    </div>
+                    <div class="form-group">
+                        <label for="dieselCurrentReading">Current Meter Reading (km):</label>
+                        <input type="number" class="form-control" id="dieselCurrentReading" name="dieselCurrentReading" oninput="calculate('diesel')">
+                    </div>
+                    <div class="form-group">
+                        <label for="dieselKilometers">Total Kilometers Driven:</label>
+                        <input type="number" class="form-control" id="dieselKilometers" name="dieselKilometers" step="0.01" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="dieselTotalLiters">Total Liters Used:</label>
+                        <input type="number" class="form-control" id="dieselTotalLiters" name="dieselTotalLiters" step="0.01" oninput="calculate('diesel', 'liters')">
+                    </div>
+                    <div class="form-group">
+                        <label for="dieselTotalPrice">Total Price:</label>
+                        <input type="number" class="form-control" id="dieselTotalPrice" name="dieselTotalPrice" step="0.01" oninput="calculate('diesel', 'price')">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function calculate(type, changedField) {
+            const price = parseFloat(document.getElementById(type + 'Price').value);
+            const previousReading = parseFloat(document.getElementById(type + 'PreviousReading').value) || 0;
+            const currentReading = parseFloat(document.getElementById(type + 'CurrentReading').value) || 0;
+            const totalLiters = parseFloat(document.getElementById(type + 'TotalLiters').value) || 0;
+            const totalPrice = parseFloat(document.getElementById(type + 'TotalPrice').value) || 0;
+
+            let kilometersDriven = '';
+            if (!isNaN(previousReading) && !isNaN(currentReading)) {
+                kilometersDriven = (currentReading - previousReading).toFixed(2);
+                document.getElementById(type + 'Kilometers').value = kilometersDriven;
+            }
+
+            if (changedField === 'liters' && !isNaN(price)) {
+                document.getElementById(type + 'TotalPrice').value = (totalLiters * price).toFixed(2);
+            } else if (changedField === 'price' && !isNaN(price)) {
+                document.getElementById(type + 'TotalLiters').value = (totalPrice / price).toFixed(2);
+            } else if (!isNaN(price) && !isNaN(totalLiters)) {
+                document.getElementById(type + 'TotalPrice').value = (totalLiters * price).toFixed(2);
+            }
+        }
+    </script>
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2024 Copyright:
+        <a class="text-center fw-bold" href="#">Tanveer Ahmad</a>
+      </div>
+</body>
+</html>
